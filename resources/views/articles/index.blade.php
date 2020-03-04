@@ -6,11 +6,11 @@
             <a href="/articles/create">Create Article</a>
         </h2>
         <div id="page" class="container">
-            @foreach($articles as $article)
+            @forelse($articles as $article)
                 <div id="content">
                     <div class="title">
                         <h2>
-                            <a href="{{ $article->path }}">
+                            <a href="{{ $article->path() }}">
                                 {{ $article->title }}
                             </a>
                         </h2>
@@ -24,7 +24,9 @@
                         {{ $article->excerpt }}
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p>No relevant articles yet.</p>
+            @endforelse
         </div>
     </div>
 @endsection

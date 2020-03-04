@@ -36,4 +36,37 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return '5531986972676';
+    }
+
+    public function articles()
+    {
+        $this->hasMany(Article::class); // select * from articles where user_id = 1
+    }
+
+    public function projects()
+    {
+        $this->hasMany(Project::class); // select * from projects where user_id = 1
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::whereName($role)->firstOrFail();
+        }
+
+        $this->roles()->sync($role, false);
+    }
+
+    public function abilities() {
+        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
+    }
 }

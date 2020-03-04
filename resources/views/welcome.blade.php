@@ -4,7 +4,18 @@
     <div id="header-featured">
         <div id="banner-wrapper">
             <div id="banner" class="container">
-                <h2>Maecenas luctus lectus</h2>
+                <h3 style="color: white">
+                    Hi,
+                    @auth
+                        {{ Auth::user()->name }}
+                    @endauth
+                    @guest
+                        guest
+                    @endguest
+                </h3>
+                <h2>
+                    Maecenas luctus lectus
+                </h2>
                 <p>This is <strong>SimpleWork</strong>, a free, fully standards-compliant CSS template designed by
                     <a
                         href="http://templated.co" rel="nofollow">TEMPLATED</a>. The photos in this template are
